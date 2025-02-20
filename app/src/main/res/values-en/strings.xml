@@ -33,12 +33,7 @@
     <string name="delete_fav_btn">Delete page from favorite</string>
     <string name="change_theme_btn">Change app theme</string>
     <dimen name="SizeMenubtn">35dp</dimen>
-    <string-array name="position_options">
-        <item>Top</item>
-        <item>Bottom</item>
-        <item>Left</item>
-        <item>Right</item>
-    </string-array>
+
     <dimen name="SizeMenu">45dp</dimen>
     <string name="DialHeadChangeURL">Change URL</string>
     <string name="CancelText">Cancel</string>
@@ -62,4 +57,6 @@
     <string name="ToastDownloadFinished">Le téléchargement de \"%1$s\" est terminé.</string>
     <string name="ToastDownloadFailed">Le téléchargement de \"%1$s\" à échoué.</string>
     <string name="DialBodyDownloadText">Le téléchargement est à</string>
+    <string name="search_google">research on Google</string>
+    <string name="search_or_enter_url">search or enter URL..</string>
 </resources>

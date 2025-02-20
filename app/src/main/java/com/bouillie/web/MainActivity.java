@@ -82,9 +82,23 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl("https://google.com");
+                view.loadUrl(request.getUrl().toString());
                 return true;
             }
+        });
+
+        EditText urlBar = findViewById(R.id.urlBar);
+        urlBar.setOnClickListener(v -> urlBar.setCursorVisible(true));
+        urlBar.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_DONE) {
+                String url = urlBar.getText().toString();
+                if (!URLUtil.isValidUrl(url)) {
+                    url = "https://www.google.com/search?q=" + url;
+                }
+                webView.loadUrl(url);
+                return true;
+            }
+            return false;
         });
 
         Button changeUrlButton = findViewById(R.id.changeUrlButton);
@@ -282,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ProgressBar myProgressBar = findViewById(R.id.progressBar);
-        TextView urlContent = findViewById(R.id.textView);
+        TextView urlContent = findViewById(R.id.urlBar);
         ImageView secureimage = findViewById(R.id.SecureImage);
 
         webView.setWebViewClient(new WebViewClient() {
