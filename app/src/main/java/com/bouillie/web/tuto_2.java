@@ -20,31 +20,25 @@ import com.google.android.play.core.install.model.UpdateAvailability;
 
 public class tuto_2 extends AppCompatActivity {
     private int selectedTheme;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int savedTheme = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getInt("selected_theme", NONE);
-        if (savedTheme != NONE) {
-            selectedTheme = savedTheme;
-        }else{
-            selectedTheme = R.style.Theme_WebApper_dark;
-        }
+        selectedTheme = (savedTheme != NONE) ? savedTheme : R.style.Theme_WebApper_dark;
         setTheme(selectedTheme);
         DynamicColors.applyToActivitiesIfAvailable(this.getApplication());
         setContentView(R.layout.tuto_2);
-        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
 
-// Returns an intent object that you use to check for an update.
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
-// Checks that the platform will allow the specified type of update.
         appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
                 appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE);
-            }// This example applies an immediate update. To apply a flexible update
-// instead, pass in AppUpdateType.FLEXIBLE
-// Request the update.
+            }
         });
+
         Button btn = findViewById(R.id.button_example_show);
         Button btn1 = findViewById(R.id.button4);
         btn.setOnClickListener(view -> {
@@ -54,13 +48,13 @@ public class tuto_2 extends AppCompatActivity {
                 btn1.setVisibility(View.VISIBLE);
             }
         });
+
         btn1.setOnClickListener(v -> {
             Intent intent = new Intent(tuto_2.this, tuto_3.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         });
-
     }
 
     @Override
@@ -73,6 +67,4 @@ public class tuto_2 extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_LOW_PROFILE);
         }
     }
-
-
 }

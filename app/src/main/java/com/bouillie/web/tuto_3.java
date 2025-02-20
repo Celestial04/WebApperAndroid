@@ -20,32 +20,25 @@ import com.google.android.play.core.install.model.UpdateAvailability;
 
 public class tuto_3 extends AppCompatActivity {
     private int selectedTheme;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int savedTheme = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getInt("selected_theme", NONE);
-        if (savedTheme != NONE) {
-            selectedTheme = savedTheme;
-        }else{
-            selectedTheme = R.style.Theme_WebApper_dark;
-        }
+        selectedTheme = (savedTheme != NONE) ? savedTheme : R.style.Theme_WebApper_dark;
         setTheme(selectedTheme);
         DynamicColors.applyToActivitiesIfAvailable(this.getApplication());
         setContentView(R.layout.tuto_3);
 
         AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
-
-// Returns an intent object that you use to check for an update.
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
-// Checks that the platform will allow the specified type of update.
         appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
                 appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE);
-            }// This example applies an immediate update. To apply a flexible update
-// instead, pass in AppUpdateType.FLEXIBLE
-// Request the update.
+            }
         });
+
         Button button = findViewById(R.id.button4);
         button.setOnClickListener(v -> {
             SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
@@ -57,7 +50,5 @@ public class tuto_3 extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-
     }
-
 }
