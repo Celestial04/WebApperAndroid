@@ -25,6 +25,7 @@
             tools:layout_editor_absoluteY="1dp">
 
             <LinearLayout
+                android:id="@+id/urlBarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorErrorContainer"
@@ -38,6 +39,12 @@
                     android:importantForAccessibility="no"
                     app:srcCompat="@android:drawable/ic_menu_info_details"
                     tools:ignore="ImageContrastCheck" />
+                <ImageView
+                    android:id="@+id/favicon"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="Favicon" />
 
                 <EditText
                     android:id="@+id/urlBar"
@@ -48,6 +55,13 @@
                     android:inputType="textUri"
                     android:padding="8dp"
                     android:singleLine="true" />
+
+                <Button
+                    android:id="@+id/infoButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Info"
+                    app:icon="@android:drawable/ic_menu_info_details" />
 
             </LinearLayout>
 
@@ -173,7 +187,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/SizeMenu"
                                 android:contentDescription="@string/delete_data_button"
-                                android:onClick='onDeleteDataClick'
+                                android:onClick="onDeleteDataClick"
                                 android:text="@string/reset_app"
                                 app:icon="@drawable/baseline_delete_forever_24"
                                 app:iconPadding="0dp"

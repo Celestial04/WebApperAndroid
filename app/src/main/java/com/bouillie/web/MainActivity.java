@@ -40,6 +40,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.boullie.web.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.color.DynamicColors;
 
 import java.io.File;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private HorizontalScrollView scroll;
     private AlertDialog alert2;
     private int selectedTheme;
+    private Bitmap faviconBitmap;
 
     private String formatDuration(long seconds) {
         long hours = seconds / 3600;
@@ -85,13 +87,29 @@ public class MainActivity extends AppCompatActivity {
                 view.loadUrl(request.getUrl().toString());
                 return true;
             }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                if (favicon != null) {
+                    faviconBitmap = favicon;
+                }
+            }
         });
 
-        EditText urlBar = findViewById(R.id.urlBar);
-        urlBar.setOnClickListener(v -> urlBar.setCursorVisible(true));
-        urlBar.setOnEditorActionListener((v, actionId, event) -> {
+        EditText urlBar2 = findViewById(R.id.urlBar);
+        urlBar2.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                urlBar2.getText().clear();
+                urlBar2.setCursorVisible(true);
+            } else {
+                urlBar2.setText(webView.getUrl());
+                urlBar2.setCursorVisible(false);
+            }
+        });
+        urlBar2.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_DONE) {
-                String url = urlBar.getText().toString();
+                String url = urlBar2.getText().toString();
                 if (!URLUtil.isValidUrl(url)) {
                     url = "https://www.google.com/search?q=" + url;
                 }
@@ -296,20 +314,34 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ProgressBar myProgressBar = findViewById(R.id.progressBar);
-        TextView urlContent = findViewById(R.id.urlBar);
         ImageView secureimage = findViewById(R.id.SecureImage);
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
                 myProgressBar.setVisibility(View.VISIBLE);
+                secureimage.setImageBitmap(webView.getFavicon());
+                try {
+                    URL parsedUrl = new URL(url);
+                    String protocol = parsedUrl.getProtocol();
+                    secureimage.setImageResource(protocol.equals("https") ? R.drawable.encrypted : R.drawable.uncrypted);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+
+                if (favicon != null) {
+                    faviconBitmap = favicon;
+                }
+                nex.setVisibility(view.canGoForward() ? View.VISIBLE : View.GONE);
             }
 
             @Override
-            public void onPageFinished(WebView view, String url) {
-                urlContent.setText(url);
-                myProgressBar.setVisibility(View.GONE);
-
+            public void onLoadResource(WebView view, String url) {
+                super.onLoadResource(view, url);
+                if (webView.getFavicon() != null) {
+                    faviconBitmap = webView.getFavicon();
+                }
                 try {
                     URL parsedUrl = new URL(url);
                     String protocol = parsedUrl.getProtocol();
@@ -320,12 +352,32 @@ public class MainActivity extends AppCompatActivity {
 
                 nex.setVisibility(view.canGoForward() ? View.VISIBLE : View.GONE);
             }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                urlBar2.setText(url);
+                myProgressBar.setVisibility(View.GONE);
+                try {
+                    URL parsedUrl = new URL(url);
+                    String protocol = parsedUrl.getProtocol();
+                    secureimage.setImageResource(protocol.equals("https") ? R.drawable.encrypted : R.drawable.uncrypted);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+
+                if (webView.getFavicon() != null) {
+                    faviconBitmap = webView.getFavicon();
+                }
+                nex.setVisibility(view.canGoForward() ? View.VISIBLE : View.GONE);
+            }
         });
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 myProgressBar.setProgress(newProgress);
+                secureimage.setImageBitmap(webView.getFavicon());
                 if (newProgress == 100) {
                     myProgressBar.setProgress(0);
                     myProgressBar.setVisibility(View.GONE);
@@ -438,6 +490,39 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         });
+
+        Button infoButton = findViewById(R.id.infoButton);
+        infoButton.setOnClickListener(v -> showPageInfoBottomSheet(webView.getTitle(), webView.getUrl(), webView.getTitle(), faviconBitmap));
+    }
+
+    private void showPageInfoBottomSheet(String title, String url, String description, Bitmap favicon) {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        View view = getLayoutInflater().inflate(R.layout.bottom_sheet_layout, null);
+        bottomSheetDialog.setContentView(view);
+
+        TextView pageTitle = view.findViewById(R.id.pageTitle);
+        TextView pageUrl = view.findViewById(R.id.pageUrl);
+        TextView pageDescription = view.findViewById(R.id.pageDescription);
+        ImageView faviconImage = view.findViewById(R.id.favicon);
+        TextView securityStatus = view.findViewById(R.id.securityStatus);
+
+        pageTitle.setText(title);
+        pageUrl.setText(url);
+        pageDescription.setText(description);
+
+        if (favicon != null) {
+            faviconImage.setImageBitmap(favicon);
+        }
+
+        try {
+            URL parsedUrl = new URL(url);
+            String protocol = parsedUrl.getProtocol();
+            securityStatus.setText(protocol.equals("https") ? "Secure" : "Not Secure");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        bottomSheetDialog.show();
     }
 
     @Override
