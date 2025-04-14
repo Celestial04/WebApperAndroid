@@ -3,7 +3,7 @@ name: Build and Sign APK
 on:
   push:
     branches:
-      - main  # ou changez la branche selon vos besoins
+      - main
   pull_request:
 
 jobs:
