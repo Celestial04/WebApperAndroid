@@ -6,7 +6,7 @@ android {
     signingConfigs {
         release {
             // Le keystore généré par GitHub Actions se trouve dans le répertoire racine de votre projet.
-            storeFile file("webapper.jks")
+            storeFile file("keystore.jks")
             storePassword System.getenv("KEYSTORE_PASSWORD") ?: "default_password"
             keyAlias System.getenv("KEY_ALIAS") ?: "default_alias"
             keyPassword System.getenv("KEY_PASSWORD") ?: "default_key_password"
