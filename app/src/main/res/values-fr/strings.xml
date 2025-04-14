@@ -62,4 +62,7 @@
     <string name="ToastDownloadFinished">Le téléchargement de \"%1$s\" est terminé.</string>
     <string name="ToastDownloadFailed">Le téléchargement de \"%1$s\" à échoué.</string>
     <string name="DialBodyDownloadText">Le téléchargement est à</string>
+    <string name="downloadSpeedText">"Vitesse : "</string>
+    <string name="ThemeAutoText">thème automatique</string>
+    <string name="ToastThemeAutoText">théme automatique activé</string>
 </resources>

@@ -18,16 +18,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="35">
         <activity
-            android:name="com.bouillie.web.tuto_3"
+            android:name="com.katsuu04.web.tuto_3"
             android:exported="false" />
         <activity
-            android:name="com.bouillie.web.tuto_2"
+            android:name="com.katsuu04.web.tuto_2"
             android:exported="false" />
         <activity
-            android:name="com.bouillie.web.tuto_1"
+            android:name="com.katsuu04.web.tuto_1"
             android:exported="false" />
         <activity
-            android:name="com.bouillie.web.MainActivity"
+            android:name="com.katsuu04.web.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

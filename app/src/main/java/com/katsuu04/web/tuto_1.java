@@ -1,4 +1,4 @@
-package com.bouillie.web;
+package com.katsuu04.web;
 
 import static android.app.usage.UsageEvents.Event.NONE;
 
@@ -8,7 +8,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.boullie.web.R;
 import com.google.android.material.color.DynamicColors;
 
 public class tuto_1 extends AppCompatActivity {

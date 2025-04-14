@@ -11,15 +11,15 @@ android {
             keyPassword System.getenv("SIGNING_KEY_PASSWORD") ?: "password"
         }
     }
-    namespace 'com.boullie.web'
+    namespace 'com.katsuu04.web'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.boullie.web"
+        applicationId "com.katsuu04.web"
         minSdk 24
         targetSdk 35
-        versionCode 10
-        versionName "5"
+        versionCode 13
+        versionName "1.2.1"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,6 +44,7 @@ dependencies {
     implementation "com.github.skydoves:colorpickerview:2.2.4"
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.google.android.material:material:1.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.0'

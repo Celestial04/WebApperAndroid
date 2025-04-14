@@ -39,12 +39,6 @@
                     android:importantForAccessibility="no"
                     app:srcCompat="@android:drawable/ic_menu_info_details"
                     tools:ignore="ImageContrastCheck" />
-                <ImageView
-                    android:id="@+id/favicon"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_horizontal"
-                    android:contentDescription="Favicon" />
 
                 <EditText
                     android:id="@+id/urlBar"
@@ -69,7 +63,8 @@
                 android:id="@+id/webview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="95" />
+                android:layout_weight="95"
+                android:contextClickable="true" />
 
             <ScrollView
                 android:id="@+id/scroll_view"

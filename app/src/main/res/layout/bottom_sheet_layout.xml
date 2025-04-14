@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -40,5 +40,87 @@
         android:layout_height="wrap_content"
         android:text="Security Status"
         android:textAppearance="?attr/textAppearanceBody2" />
+
+    <Button
+        android:id="@+id/changeUrlButton"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="1"
+        android:text="@string/change_url_btn"
+        app:icon="@android:drawable/ic_menu_preferences" />
+
+    <Button
+        android:id="@+id/button"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/forward_button"
+        android:text="@string/previous_page"
+        app:icon="@drawable/baseline_arrow_circle_right_24"
+        app:iconGravity="textEnd"
+        app:iconPadding="0dp"
+        app:iconSize="@dimen/SizeMenubtn" />
+
+    <Button
+        android:id="@+id/button8"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/refresh_button"
+        android:text="@string/reload_page_btn"
+        app:icon="@drawable/baseline_refresh_24"
+        app:iconPadding="0dp"
+        app:iconSize="@dimen/SizeMenubtn" />
+
+    <Button
+        android:id="@+id/button6"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/saved_pages_btn"
+        app:icon="@drawable/baseline_bookmarks_24"
+        app:iconGravity="textEnd"
+        app:iconPadding="0dp"
+        app:iconSize="@dimen/SizeMenubtn" />
+
+    <Button
+        android:id="@+id/button5"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/favorite_button_add"
+        android:text="@string/add_fav_btn"
+        app:icon="@drawable/baseline_bookmark_add_24"
+        app:iconPadding="0dp"
+        app:iconSize="@dimen/SizeMenubtn" />
+
+    <Button
+        android:id="@+id/button7"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/delete_fav_button"
+        android:text="@string/delete_fav_btn"
+        app:icon="@drawable/baseline_bookmark_remove_24"
+        app:iconPadding="0dp"
+        app:iconSize="@dimen/SizeMenubtn" />
+
+    <Button
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:contentDescription="@string/delete_data_button"
+        android:onClick="onDeleteDataClick"
+        android:text="@string/reset_app"
+        app:icon="@drawable/baseline_delete_forever_24"
+        app:iconPadding="0dp"
+        app:iconSize="@dimen/SizeMenubtn" />
 
 </LinearLayout>

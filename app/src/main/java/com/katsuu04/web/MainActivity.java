@@ -1,10 +1,12 @@
-package com.bouillie.web;
+package com.katsuu04.web;
 
 import static android.app.DownloadManager.Request;
 import static android.app.usage.UsageEvents.Event.NONE;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +18,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.CookieManager;
@@ -39,7 +43,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.boullie.web.R;
+import com.katsuu04.web.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.color.DynamicColors;
 
@@ -144,22 +148,28 @@ public class MainActivity extends AppCompatActivity {
         soundButton.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle(getString(R.string.DialHeadTheme));
-
-            String[] options = {getString(R.string.ThemeDefaultText), getString(R.string.ThemeNightText)};
+            String[] options = {getString(R.string.ThemeDefaultText), getString(R.string.ThemeNightText), getString(R.string.ThemeAutoText)};
             builder.setItems(options, (dialog, which) -> {
                 switch (which) {
                     case 0:
                         Toast.makeText(getApplicationContext(), getString(R.string.ToastThemeDefaultText), Toast.LENGTH_SHORT).show();
                         selectedTheme = R.style.Theme_WebApper_dark;
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                         updateTheme();
                         break;
                     case 1:
                         Toast.makeText(getApplicationContext(), getString(R.string.ToastThemeNightText), Toast.LENGTH_SHORT).show();
                         selectedTheme = R.style.Theme_WebApper_light;
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        updateTheme();
+                        break;
+                    case 2:
+                        Toast.makeText(getApplicationContext(), getString(R.string.ToastThemeAutoText), Toast.LENGTH_SHORT).show();
+                        selectedTheme = R.style.Theme_WebApper_dark;
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                         updateTheme();
                         break;
                 }
@@ -337,27 +347,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onLoadResource(WebView view, String url) {
-                super.onLoadResource(view, url);
-                if (webView.getFavicon() != null) {
-                    faviconBitmap = webView.getFavicon();
-                }
-                try {
-                    URL parsedUrl = new URL(url);
-                    String protocol = parsedUrl.getProtocol();
-                    secureimage.setImageResource(protocol.equals("https") ? R.drawable.encrypted : R.drawable.uncrypted);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-
-                nex.setVisibility(view.canGoForward() ? View.VISIBLE : View.GONE);
-            }
-
-            @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 urlBar2.setText(url);
                 myProgressBar.setVisibility(View.GONE);
+                secureimage.setImageBitmap(webView.getFavicon());
                 try {
                     URL parsedUrl = new URL(url);
                     String protocol = parsedUrl.getProtocol();
@@ -492,7 +486,60 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button infoButton = findViewById(R.id.infoButton);
-        infoButton.setOnClickListener(v -> showPageInfoBottomSheet(webView.getTitle(), webView.getUrl(), webView.getTitle(), faviconBitmap));
+        infoButton.setOnClickListener(v -> showPageInfoBottomSheet(webView.getTitle(), webView.getUrl(), String.valueOf(webView.getContentDescription()), faviconBitmap));
+
+        // Register the WebView for context menu
+        registerForContextMenu(webView);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        WebView webView = (WebView) v;
+        WebView.HitTestResult result = webView.getHitTestResult();
+        if (result != null) {
+            int type = result.getType();
+            if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+                menu.setHeaderTitle("Image Options");
+                menu.add(0, 1, 0, "Copy Image");
+                menu.add(0, 2, 0, "Save Image");
+            } else if (type == WebView.HitTestResult.ANCHOR_TYPE || type == WebView.HitTestResult.SRC_ANCHOR_TYPE) {
+                menu.setHeaderTitle("Link Options");
+                menu.add(0, 3, 0, "Copy Link");
+                menu.add(0, 4, 0, "Open Link in New Tab");
+            }
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        WebView webView = findViewById(R.id.webview);
+        WebView.HitTestResult result = webView.getHitTestResult();
+        if (result != null) {
+            switch (item.getItemId()) {
+                case 1: // Copy Image
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("Copied Image", result.getExtra());
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(getApplicationContext(), "Image copied to clipboard", Toast.LENGTH_SHORT).show();
+                    return true;
+                case 2: // Save Image
+                    // Implement image saving logic here
+                    Toast.makeText(getApplicationContext(), "Image saved", Toast.LENGTH_SHORT).show();
+                    return true;
+                case 3: // Copy Link
+                    ClipboardManager clipboardLink = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    ClipData clipLink = ClipData.newPlainText("Copied Link", result.getExtra());
+                    clipboardLink.setPrimaryClip(clipLink);
+                    Toast.makeText(getApplicationContext(), "Link copied to clipboard", Toast.LENGTH_SHORT).show();
+                    return true;
+                case 4: // Open Link in New Tab
+                    String url = result.getExtra();
+                    webView.loadUrl(url);
+                    return true;
+            }
+        }
+        return super.onContextItemSelected(item);
     }
 
     private void showPageInfoBottomSheet(String title, String url, String description, Bitmap favicon) {

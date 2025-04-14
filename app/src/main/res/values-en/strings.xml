@@ -59,4 +59,7 @@
     <string name="DialBodyDownloadText">Le téléchargement est à</string>
     <string name="search_google">research on Google</string>
     <string name="search_or_enter_url">search or enter URL..</string>
+    <string name="eta">"ETA: "</string>
+    <string name="securityTextSecure">Secure</string>
+    <string name="securityTextNotSecure">Not Secure</string>
 </resources>
