@@ -5,10 +5,11 @@ plugins {
 android {
     signingConfigs {
         release {
-            storeFile file("app/webKeyRL.jks")
-            storePassword System.getenv("SIGNING_STORE_PASSWORD") ?: "password"
-            keyAlias System.getenv("SIGNING_KEY_ALIAS") ?: "alias"
-            keyPassword System.getenv("SIGNING_KEY_PASSWORD") ?: "password"
+            // Le keystore généré par GitHub Actions se trouve dans le répertoire racine de votre projet.
+            storeFile file("keystore.jks")
+            storePassword System.getenv("KEYSTORE_PASSWORD") ?: "default_password"
+            keyAlias System.getenv("KEY_ALIAS") ?: "default_alias"
+            keyPassword System.getenv("KEY_PASSWORD") ?: "default_key_password"
         }
     }
     namespace 'com.katsuu04.web'
@@ -26,7 +27,9 @@ android {
 
     buildTypes {
         release {
+            // Utiliser la configuration de signature pour la version release
             signingConfig signingConfigs.release
+            // Vous pouvez activer ou non la minification/proguard selon vos besoins
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -38,16 +41,16 @@ android {
 }
 
 dependencies {
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-beta01"
     implementation 'com.google.android.play:app-update:2.1.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation "com.github.skydoves:colorpickerview:2.2.4"
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'com.google.android.material:material:1.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'

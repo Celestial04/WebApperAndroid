@@ -62,4 +62,5 @@
     <string name="eta">"ETA: "</string>
     <string name="securityTextSecure">Secure</string>
     <string name="securityTextNotSecure">Not Secure</string>
+    <string name="aboutThisPageButton">about this</string>
 </resources>
