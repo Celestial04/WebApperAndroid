@@ -10,8 +10,8 @@ Navigation :
 - [Vidéo démo](#voici-une-petite-vidéo-montrant-toutes-les-fonctions-de-webapper)
 - [Téléchargements](#téléchargements)
 - [Traductions](#traduction)
-- [To-do](#to-do)
 - [Contribuer](#contribution)
+- [Compiler WebApper](#compiler-webapper)
 
 ## Voici les choses dont permet WebApper
 
@@ -85,3 +85,31 @@ seront aussitôt mises dans le code source de l'application.
 
 Tout le monde peut proposer des changements, voir des corrections, ce qui m'aide beaucoup, et permet
 d'accélerer le développement de WebApper, et j'en suis très reconnaissante et je vous remercie d'avance!
+
+## Compiler WebApper
+Vous aurez besoin de:
+- [Android Studio](https://developer.android.com/studio)
+- [Git](https://git-scm.com/downloads)
+- [Eclipse Temurin](https://adoptium.net/fr/temurin/releases/) ou [Java](https://www.oracle.com/fr/java/technologies/downloads/) (java 17 ou plus néssecaire)
+
+1. cloner le repo
+```bash
+git clone https://github.com/Celestial04/WebApperAndroid.git
+cd WebApperAndroid
+```
+
+2. Ouvrez le repo cloné
+Lancez Android Studio puis ouvrez le dossier contenant le repo cloné
+
+3. Compiler WebApper
+
+  **via Android Studio** > `Build` > `Make Project`
+  
+  **en ligne de commande**:
+  
+   - **Linux/macOS**:
+     `./gradlew assembleDebug`
+   - **Windows**:
+     `gradlew.bat assembleDebug`
+
+Pour savoir comment faire un PR, merci de suivre la partie [Contribution](#contribution)
