@@ -66,4 +66,5 @@
     <string name="ThemeAutoText">thème automatique</string>
     <!-- Other string resources -->
     <string name="ToastThemeAutoText">théme automatique activé</string>
+    <string name="aboutThisPageButton">about this</string>
 </resources>
