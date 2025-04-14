@@ -22,7 +22,8 @@
             android:fitsSystemWindows="true"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="1dp">
+            tools:layout_editor_absoluteY="1dp"
+            tools:ignore="UselessParent">
 
             <LinearLayout
                 android:id="@+id/urlBarContainer"
@@ -37,6 +38,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:importantForAccessibility="no"
+                    android:importantForAutofill="no"
                     app:srcCompat="@android:drawable/ic_menu_info_details"
                     tools:ignore="ImageContrastCheck" />
 
@@ -47,14 +49,16 @@
                     android:layout_weight="1"
                     android:hint="@string/search_or_enter_url"
                     android:inputType="textUri"
+                    android:minHeight="48dp"
                     android:padding="8dp"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColorHint="#616161" />
 
                 <Button
                     android:id="@+id/infoButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Info"
+                    android:text="@string/aboutThisPageButton"
                     app:icon="@android:drawable/ic_menu_info_details" />
 
             </LinearLayout>
@@ -102,6 +106,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:layout_weight="1"
                                 android:text="@string/change_url_btn"
+                                android:textColor="#9575CD"
                                 app:icon="@android:drawable/ic_menu_preferences" />
 
                             <Button
@@ -112,6 +117,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="@string/forward_button"
                                 android:text="@string/previous_page"
+                                android:textColor="#9575CD"
                                 app:icon="@drawable/baseline_arrow_circle_right_24"
                                 app:iconGravity="textEnd"
                                 app:iconPadding="0dp"
@@ -125,6 +131,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="@string/refresh_button"
                                 android:text="@string/reload_page_btn"
+                                android:textColor="#9575CD"
                                 app:icon="@drawable/baseline_refresh_24"
                                 app:iconPadding="0dp"
                                 app:iconSize="@dimen/SizeMenubtn" />

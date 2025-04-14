@@ -33,12 +33,6 @@
     <string name="delete_fav_btn">Supprimer un favoris</string>
     <string name="change_theme_btn">Changer le thème</string>
     <dimen name="SizeMenubtn">35dp</dimen>
-    <string-array name="position_options">
-        <item>Top</item>
-        <item>Bottom</item>
-        <item>Left</item>
-        <item>Right</item>
-    </string-array>
     <dimen name="SizeMenu">45dp</dimen>
     <string name="DialHeadChangeURL">Changer l\'URL</string>
     <string name="CancelText">Annuler</string>
