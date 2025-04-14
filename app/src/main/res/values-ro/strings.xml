@@ -58,4 +58,13 @@
     <string name="DialBodyDownloadText">Le téléchargement est à</string>
     <string name="search_google">research on Google</string>
     <string name="search_or_enter_url">search or enter URL..</string>
+    <string name="eta">"ETA: "</string>
+    <string name="downloadSpeedText">"Vitesse : "</string>
+    <string name="securityTextSecure">Secure</string>
+    <string name="securityTextNotSecure">Not Secure</string>
+    <string name="contextMenu">context</string>
+    <string name="ThemeAutoText">thème automatique</string>
+    <!-- Other string resources -->
+    <string name="ToastThemeAutoText">théme automatique activé</string>
+    <string name="aboutThisPageButton">about this</string>
 </resources>
