@@ -2,7 +2,7 @@
 # WebApper est un navigateur simple a utiliser, sécurisé, privé, et open-source.
 
 Vous avez besoin d'aller chercher un paramètre spécifique sans avoir à naviguer a travers des
-menus ? WebApper est là pour vous aider.
+menus? WebApper est là pour vous aider.
 
 Navigation :
 
@@ -19,7 +19,7 @@ Navigation :
 
 WebApper est un navigateur qui vous facilite l'accès aux paramètres, vous souhaitez ajouter un site
 aux favoris ? Un bouton dans le Menu défilant. vous souhaitez supprimer toutes les données de
-l'application ? Un bouton est disponible aussi dans le Menu défilant, changer d'URL ? C'est aussi
+l'application ? Un bouton est disponible aussi dans le Menu défilant, changer d'URL? C'est aussi
 inclus dans le Menu défilant.
 Enfin bref, tout est acessible directement en seuelement deux touchés.
 
@@ -27,18 +27,18 @@ Enfin bref, tout est acessible directement en seuelement deux touchés.
 
 WebApper est aussi un navigateur sécurisé, toutes vos données peuvent être supprimées rapidement, et
 **votre historique de navigation n'est pas enregistré** , cela veut dire que lorsque vous fermer le
-navigateur, l'**historique disparaît**. Assez pratique n'es-ce pas ?
+navigateur, l'**historique disparaît**. Assez pratique n'es-ce pas?
 
 ### Open source
 
 WebApper est Open-Source, cela veut dire que si quelqu'un veut modifier WebApper afin de mettre un
-bloqueur de pubs, c'est possible. Entendre un "*Meow*" à chaque fois que vous changez de page ?
+bloqueur de pubs, c'est possible. Entendre un "*miaou*" à chaque fois que vous changez de page ?
 C'est aussi possible.
 Le plus grand avantage selon moi c'est de **pouvoir proposer ses propres changements pour
 l'application**, c'est vrai quoi, voir une fonction qu'on propose à une chose que tout le monde peut
 utiliser, ça c'est cool.
 
-### Aussi quelques trucs que je trouve bien :
+### Aussi quelques trucs que je trouve bien:
 
 - Rapidité d'ouverture
 - Deux thèmes sont disponibles, le thème Nuit, et le thème Clair.
@@ -72,7 +72,7 @@ utiliser, ça c'est cool.
 uniquement sur GitHub pour l'instant**.
 
 > [!NOTE]
-> Si jamais, vous voulez proposer des changements, vous pouvez le faire en créant un pull request. (c'est un peu le principe de l'Open Source, mais je le rappelle au cas où.)
+> Si jamais, vous voulez proposer des changements, vous pouvez le faire en créant un PR. (c'est un peu le principe de l'Open Source, mais je le rappelle au cas où.)
 
 ## Traduction
 
@@ -81,17 +81,7 @@ plus simple que d'aller sur [la page Crowdin de WebApper](https://crowdin.com/pr
 traductions effectuées seront en attentes de validations, une fois les traductions validées, elles
 seront aussitôt mises dans le code source de l'application.
 
-## To-do
-
-- [x] Corriger le bug du % négatif lors du téléchargement
-- [x] Repenser l'interface
-- [ ] Migrer les textes vers des strings pour faciliter la traduction (en cours)
-- [ ] Possibilité de choisir la destination du téléchargement
-- [ ] Fixer l'estimation de l'ETA
-- [ ] Adapter la vue pour les tablettes et grands écrans
-- [ ] Faire une page "à propos de"
-
 ## Contribution
 
 Tout le monde peut proposer des changements, voir des corrections, ce qui m'aide beaucoup, et permet
-d'accélerer le développement de WebApper, et j'en suis très reconnaissante et je vous remercie d'avance! ^-^
+d'accélerer le développement de WebApper, et j'en suis très reconnaissante et je vous remercie d'avance!
