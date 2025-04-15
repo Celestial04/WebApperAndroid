@@ -62,5 +62,8 @@
     <string name="eta">"ETA: "</string>
     <string name="securityTextSecure">Secure</string>
     <string name="securityTextNotSecure">Not Secure</string>
-    <string name="aboutThisPageButton">about this</string>
+    <string name="aboutThisPageButton">about this page</string>
+    <string name="aboutThisAppButton">About</string>
+    <string name="DialHeadAbout">About%1$s</string>
+    <string name="DialBodyAbout">%1$s is a simple, free, fast and secure web browser with a user interface very simple for reach each settings very fast</string>
 </resources>

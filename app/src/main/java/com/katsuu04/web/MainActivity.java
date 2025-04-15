@@ -3,6 +3,8 @@ package com.katsuu04.web;
 import static android.app.DownloadManager.Request;
 import static android.app.usage.UsageEvents.Event.NONE;
 
+import static androidx.core.content.res.TypedArrayUtils.getText;
+
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.ClipData;
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog alert2;
     private int selectedTheme;
     private Bitmap faviconBitmap;
+    private Button buttonAbout;
 
     private String formatDuration(long seconds) {
         long hours = seconds / 3600;
@@ -100,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        // Liaison avec le bouton défini dans activity_main.xml
+        buttonAbout = findViewById(R.id.aboutButton);
+        buttonAbout.setOnClickListener(v -> buttonAbout());
         EditText urlBar2 = findViewById(R.id.urlBar);
         urlBar2.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
@@ -143,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
             builder.show();
         });
+
 
         Button soundButton = findViewById(R.id.soundButton);
         soundButton.setOnClickListener(v -> {
@@ -187,6 +193,9 @@ public class MainActivity extends AppCompatActivity {
                 nex.setVisibility(View.GONE);
             }
         });
+        buttonAbout = findViewById(R.id.aboutButton);
+
+
 
         webView.setDownloadListener(new DownloadListener() {
             final List<AlertDialog.Builder> dialogsList = new ArrayList<>();
@@ -591,6 +600,18 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    private void buttonAbout() {
+        String appName = getString(R.string.app_name);
+        String aboutHeaderText = getString(R.string.DialHeadAbout, appName);
+        String aboutBodyText = getString(R.string.DialBodyAbout, appName);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(aboutHeaderText);
+        builder.setMessage(aboutBodyText);
+        builder.setPositiveButton("OK", null);
+        builder.show();
+    }
+
     private void FirstStart() {
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -666,3 +687,4 @@ public class MainActivity extends AppCompatActivity {
         this.alert2 = alert2;
     }
 }
+

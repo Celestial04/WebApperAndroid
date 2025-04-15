@@ -56,16 +56,21 @@
     <string name="ToastDownloadFinished">Le téléchargement de \"%1$s\" est terminé.</string>
     <string name="ToastDownloadFailed">Le téléchargement de \"%1$s\" à échoué.</string>
     <string name="DialBodyDownloadText">Le téléchargement est à</string>
-    <string name="search_google">research on Google</string>
-    <string name="search_or_enter_url">search or enter URL..</string>
+    <string name="search_google">rechercher sur google</string>
+    <string name="search_or_enter_url">cherchez ou entrez une URL..</string>
     <string name="eta">"ETA: "</string>
     <string name="downloadSpeedText">"Vitesse : "</string>
-    <string name="securityTextSecure">Secure</string>
-    <string name="securityTextNotSecure">Not Secure</string>
+    <string name="securityTextSecure">Sécurisé</string>
+    <string name="securityTextNotSecure">Non sécurisé</string>
     <string name="contextMenu">context</string>
     <string name="ThemeAutoText">thème automatique</string>
         <!-- Other string resources -->
-    <string name="ToastThemeAutoText">Your Auto Theme text here</string>
-    <string name="aboutThisPageButton">about this</string>
+    <string name="about_text">À propos de %1$s</string>
+
+    <string name="ToastThemeAutoText">auto</string>
+    <string name="aboutThisPageButton">à propos de cette page</string>
+    <string name="aboutThisAppButton">à propos de</string>
+    <string name="DialHeadAbout">About %1$s</string>
+    <string name="DialBodyAbout">%1$s is a simple, free, fast and secure web browser with a user interface very simple for reach each settings very fast</string>
 
 </resources>
