@@ -59,4 +59,5 @@
     <string name="downloadSpeedText">"Vitesse : "</string>
     <string name="ThemeAutoText">thème automatique</string>
     <string name="ToastThemeAutoText">théme automatique activé</string>
+    <string name="aboutThisAppDialHeader">À propos de</string>
 </resources>

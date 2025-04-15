@@ -195,6 +195,13 @@
                                 app:iconPadding="0dp"
                                 app:iconSize="@dimen/SizeMenubtn" />
 
+                            <Button
+                                style="?android:attr/buttonBarButtonStyle"
+                                android:id="@+id/aboutButton"
+                                android:layout_height="@dimen/SizeMenu"
+                                android:layout_width="wrap_content"
+                                android:text="@string/aboutThisAppButton"
+                                android:layout_gravity="center" />
                         </LinearLayout>
                     </HorizontalScrollView>
                 </LinearLayout>
